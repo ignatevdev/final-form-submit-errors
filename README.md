@@ -6,7 +6,7 @@
 
 `final-form` is a great library, but it has one major problem. After you throw a submit error, your form becomes invalid forever and submit errors would not be cleared until the next submit.
 
-In this case, it's very intuitive to clear an error if the field containing the error is changing. `final-form-submit-errors` does exactly that.
+It's very intuitive to clear an error if the field containing the error is changing, and `final-form-submit-errors` does exactly that.
 
 ## Usage
 

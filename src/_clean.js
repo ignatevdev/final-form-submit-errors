@@ -1,4 +1,4 @@
-const isObjectEmpty = obj => Object.entries(obj).length === 0 && obj.constructor === Object;
+import isObjectEmpty from './_isObjectEmpty';
 
 // Recursively clean an object from empty values
 export default function clean(obj) {

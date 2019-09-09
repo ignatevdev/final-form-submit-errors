@@ -1,6 +1,6 @@
 {
   "name": "final-form-submit-errors",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Submit errors helper for final-form",
   "author": "Anton Ignatev <nsls@atamore.com> (http://github.com/ignatevdev)",
   "license": "MIT",
@@ -24,7 +24,7 @@
     "lint": "eslint ./src",
     "test": "jest",
     "test:watch": "jest --watchAll",
-    "prepublish": "build"
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.6.0",
@@ -55,7 +55,8 @@
   },
   "peerDependencies": {
     "final-form": "^4.18.2",
-    "react-final-form": "^6.3.0"
+    "react-final-form": "^6.3.0",
+    "react": "^16.8.6"
   },
   "dependencies": {}
 }
