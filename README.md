@@ -1,6 +1,6 @@
 # final-form-submit-errors
 [![NPM version][npm-image]][npm-url]
-[![Build status][travis-image]][]
+[![Build Status][travis-image]](https://travis-ci.org/ignatevdev/final-form-submit-errors)
 
 [npm-image]: https://img.shields.io/npm/v/final-form-submit-errors.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/final-form-submit-errors
