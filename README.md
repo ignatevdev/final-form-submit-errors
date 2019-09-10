@@ -8,6 +8,11 @@
 
 It's very intuitive to clear an error if the field containing the error is changing, and `final-form-submit-errors` does exactly that.
 
+## Install
+`npm i final-form-submit-errors`
+or
+`yarn add final-form-submit-errors`
+
 ## Usage
 
 ```jsx
