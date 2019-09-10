@@ -1,8 +1,10 @@
 # final-form-submit-errors
 [![NPM version][npm-image]][npm-url]
+[![Build status][travis-image]]
 
 [npm-image]: https://img.shields.io/npm/v/final-form-submit-errors.svg?style=flat-square
 [npm-url]: https://www.npmjs.com/package/final-form-submit-errors
+[travis-image]: https://travis-ci.org/ignatevdev/final-form-submit-errors.svg?branch=master
 
 ### A helper for [react-final-form](https://github.com/final-form/react-final-form) which enables automatic submit errors reset
 
