@@ -1,8 +1,10 @@
+import type {Mutator} from 'final-form';
+
 import clean from './_clean';
 import flatten from './_flatten';
 import isObjectEmpty from './_isObjectEmpty';
 
-export function resetSubmitErrors([{ prev, current }], state, { getIn, setIn }) {
+export const resetSubmitErrors: Mutator = ([{ prev, current }], state, { getIn, setIn }) => {
     // Reset the general submit error on any value change
     if (state.formState.submitError) {
         delete state.formState.submitError;
@@ -21,6 +23,7 @@ export function resetSubmitErrors([{ prev, current }], state, { getIn, setIn }) 
                 changed.push(key);
             }
         });
+        
 
         // Reset the error on value change
         if (changed.length) {
@@ -39,5 +42,5 @@ export function resetSubmitErrors([{ prev, current }], state, { getIn, setIn }) 
 }
 
 export default {
-    resetSubmitErrors,
+    resetSubmitErrors
 };

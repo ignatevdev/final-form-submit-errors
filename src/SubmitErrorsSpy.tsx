@@ -5,12 +5,14 @@ import { FormSpy } from 'react-final-form';
 function Spy({ form: { mutators }, values }) {
     const prevValues = React.useRef(values);
 
-    mutators.resetSubmitErrors({
-        current: values,
-        prev: prevValues.current,
-    });
+    React.useLayoutEffect(() => {
+        mutators.resetSubmitErrors({
+            current: values,
+            prev: prevValues.current,
+        });
 
-    prevValues.current = values;
+        prevValues.current = values;
+    });
 
     return null;
 }
