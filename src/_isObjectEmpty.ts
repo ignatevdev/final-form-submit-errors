@@ -1,4 +1,4 @@
-export default function isObjectEmpty(obj) {
+export default function isObjectEmpty(obj: any) {
     if (!obj) {
         return true;
     }

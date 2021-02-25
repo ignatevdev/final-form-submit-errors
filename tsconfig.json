@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "moduleResolution": "node",
+        "outDir": "dist",
+        "module": "ES6",
+        "declaration": true,
+        "baseUrl": ".",
+        "lib": ["es2017", "es7", "es6", "dom"],
+        "noImplicitAny": false,
+        "jsx": "react",
+        "esModuleInterop": true
+    },
+    "include": ["./src"],
+    "exclude": ["./src/**/*.spec.ts", "./src/**/*.spec.tsx"]
+}

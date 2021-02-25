@@ -2,7 +2,13 @@ import { getIn, setIn } from 'final-form';
 
 import { resetSubmitErrors } from './submitErrorsMutators';
 
-const makeFormState = ({ submitErrors, submitError }) => ({
+const makeFormState = ({
+    submitErrors,
+    submitError,
+}: {
+    submitErrors?: any;
+    submitError?: any;
+}) => ({
     formState: {
         submitError,
         submitErrors,

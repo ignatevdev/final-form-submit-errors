@@ -1,13 +1,13 @@
-export default function flatten(ob) {
-    const toReturn = {};
+export default function flatten(obj: any) {
+    const toReturn: any = {};
 
-    for (const i in ob) {
-        if (!ob.hasOwnProperty(i)) {
+    for (const i in obj) {
+        if (!obj.hasOwnProperty(i)) {
             continue;
         }
 
-        if (typeof ob[i] === 'object' && ob[i] !== null) {
-            const flatObject = flatten(ob[i]);
+        if (typeof obj[i] === 'object' && obj[i] !== null) {
+            const flatObject = flatten(obj[i]);
 
             for (const x in flatObject) {
                 if (!flatObject.hasOwnProperty(x)) {
@@ -20,7 +20,7 @@ export default function flatten(ob) {
                         return `${str}${value}`;
                     }
 
-                    if (!isNaN(value)) {
+                    if (!isNaN(Number(value))) {
                         return `${str}[${value}]`;
                     }
 
@@ -34,7 +34,7 @@ export default function flatten(ob) {
                 toReturn[key] = flatObject[x];
             }
         } else {
-            toReturn[i] = ob[i];
+            toReturn[i] = obj[i];
         }
     }
 

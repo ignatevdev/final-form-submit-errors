@@ -1,8 +1,8 @@
 import isObjectEmpty from './_isObjectEmpty';
 
 // Recursively clean an object from empty values
-export default function clean(obj) {
-    const newObj = Array.isArray(obj) ? [] : {};
+export default function clean(obj: any) {
+    const newObj: any = Array.isArray(obj) ? [] : {};
 
     Object.keys(obj).forEach(key => {
         if (obj[key] && typeof obj[key] === 'object') {
