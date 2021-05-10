@@ -23,6 +23,7 @@
     "test": "run-s  test:jest",
     "test:jest": "jest",
     "test:watch": "jest --watch",
+    "lint": "eslint '*/**/*.{ts,tsx}' --quiet --fix --max-warnings=0",
     "start": "run-s build:clean build:watch",
     "build": "run-s build:clean build:esm build:rename build:cjs",
     "build:watch": "tsc -p tsconfig.json --watch",
@@ -38,8 +39,10 @@
     "@babel/preset-react": "^7.0.0",
     "@testing-library/react": "^9.1.4",
     "@types/jest": "^26.0.20",
-    "@types/react": "^17.0.2",
+    "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.1",
+    "@typescript-eslint/eslint-plugin": "^4.22.1",
+    "@typescript-eslint/parser": "^4.22.1",
     "babel-eslint": "^10.0.3",
     "babel-jest": "^24.9.0",
     "cross-env": "^5.2.1",
@@ -64,7 +67,7 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^26.5.2",
     "ts-loader": "^8.0.17",
-    "typescript": "^4.2.2"
+    "typescript": "^4.2.4"
   },
   "peerDependencies": {
     "final-form": "^4.18.2",

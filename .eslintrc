@@ -1,11 +1,25 @@
 {
-    "parser": "babel-eslint",
-    "extends": ["standard", "standard-react", "prettier"],
-    "plugins": ["jest"],
+    "parser": "@typescript-eslint/parser",
+    "plugins": [
+        "jest",
+        "@typescript-eslint"
+    ],
+    "extends": [
+        "plugin:@typescript-eslint/recommended",
+        "standard",
+        "standard-react",
+        "prettier"
+    ],
     "env": {
         "jest/globals": true
     },
     "rules": {
-        "no-prototype-builtins": 0
+        "no-use-before-define": "off",
+        "no-prototype-builtins": 0,
+        "@typescript-eslint/no-use-before-define": [
+            "error"
+        ],
+        "@typescript-eslint/no-explicit-any": 0,
+        "@typescript-eslint/explicit-module-boundary-types": 0
     }
 }

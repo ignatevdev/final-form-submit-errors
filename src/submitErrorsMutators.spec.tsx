@@ -1,4 +1,4 @@
-import { getIn, setIn } from 'final-form';
+import { MutableState, getIn, setIn, Tools } from 'final-form';
 
 import { resetSubmitErrors } from './submitErrorsMutators';
 
@@ -8,11 +8,24 @@ const makeFormState = ({
 }: {
     submitErrors?: any;
     submitError?: any;
-}) => ({
+}): MutableState<any, any> => ({
     formState: {
         submitError,
         submitErrors,
+        dirtySinceLastSubmit: false,
+        errors: {},
+        submitFailed: false,
+        submitting: false,
+        pristine: false,
+        submitSucceeded: false,
+        valid: false,
+        validating: 0,
+        values: {},
+        lastSubmittedValues: {},
+        modifiedSinceLastSubmit: false
     },
+    fieldSubscribers: {},
+    fields: {},
 });
 
 describe('submitErrorsMutators', () => {
@@ -31,7 +44,7 @@ describe('submitErrorsMutators', () => {
             },
         });
 
-        resetSubmitErrors([{ prev, current }], state, { getIn, setIn });
+        resetSubmitErrors([{ prev, current }], state, { getIn, setIn } as Tools<any>);
 
         expect(state.formState.submitErrors).toEqual({
             value: 'error',
@@ -62,7 +75,7 @@ describe('submitErrorsMutators', () => {
             },
         });
 
-        resetSubmitErrors([{ prev, current }], state, { getIn, setIn });
+        resetSubmitErrors([{ prev, current }], state, { getIn, setIn } as Tools<any>);
 
         expect(state.formState.submitErrors).toEqual({});
     });
@@ -98,7 +111,7 @@ describe('submitErrorsMutators', () => {
             },
         });
 
-        resetSubmitErrors([{ prev, current }], state, { getIn, setIn });
+        resetSubmitErrors([{ prev, current }], state, { getIn, setIn } as Tools<any>);
 
         expect(state.formState.submitErrors).toEqual({});
     });
@@ -142,7 +155,7 @@ describe('submitErrorsMutators', () => {
             },
         });
 
-        resetSubmitErrors([{ prev, current }], state, { getIn, setIn });
+        resetSubmitErrors([{ prev, current }], state, { getIn, setIn } as Tools<any>);
 
         expect(state.formState.submitErrors).toEqual({
             array: [undefined, { value: 'error' }],
