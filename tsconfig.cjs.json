@@ -1,7 +1,7 @@
 {
-    "extends": "./tsconfig.json",
-    "compilerOptions": {
-        "module": "CommonJS",
-        "declaration": false
-    }
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "CommonJS",
+    "declaration": false
+  }
 }

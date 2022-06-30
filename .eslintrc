@@ -1,25 +1,24 @@
 {
-    "parser": "@typescript-eslint/parser",
-    "plugins": [
-        "jest",
-        "@typescript-eslint"
-    ],
-    "extends": [
-        "plugin:@typescript-eslint/recommended",
-        "standard",
-        "standard-react",
-        "prettier"
-    ],
-    "env": {
-        "jest/globals": true
-    },
-    "rules": {
-        "no-use-before-define": "off",
-        "no-prototype-builtins": 0,
-        "@typescript-eslint/no-use-before-define": [
-            "error"
-        ],
-        "@typescript-eslint/no-explicit-any": 0,
-        "@typescript-eslint/explicit-module-boundary-types": 0
-    }
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["jest", "@typescript-eslint"],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "standard",
+    "standard-react",
+    "prettier"
+  ],
+  "env": {
+    "jest/globals": true,
+    "node": true,
+    "jest": true,
+    "browser": true
+  },
+  "rules": {
+    "no-use-before-define": "off",
+    "no-prototype-builtins": 0,
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "@typescript-eslint/no-explicit-any": 0,
+    "@typescript-eslint/no-empty-function": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0
+  }
 }

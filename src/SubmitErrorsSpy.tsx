@@ -1,22 +1,66 @@
 import * as React from 'react';
 
-import { FormSpy } from 'react-final-form';
+import { FORM_ERROR, getIn } from 'final-form';
+import { FormSpy, FormSpyRenderProps } from 'react-final-form';
 
-function Spy({ form: { mutators }, values }) {
-    const prevValues = React.useRef(values);
+import { isObjectEmpty, flatten } from './utils';
 
-    React.useLayoutEffect(() => {
-        mutators.resetSubmitErrors({
-            current: values,
-            prev: prevValues.current,
+import type { UnwrappedSubmitErrorsMutators } from './submitErrorsMutators';
+
+export const Spy = ({
+  form: { mutators },
+  values,
+  submitError,
+  submitErrors,
+}: FormSpyRenderProps) => {
+  const { resetSubmitError, resetSubmitErrors } =
+    mutators as Partial<UnwrappedSubmitErrorsMutators>;
+
+  const prevValues = React.useRef<Record<string, any>>(values);
+
+  React.useLayoutEffect(() => {
+    if (prevValues.current !== values) {
+      if (submitError || (submitErrors && submitErrors[FORM_ERROR])) {
+        if (resetSubmitError) {
+          resetSubmitError();
+        } else {
+          console.error('resetSubmitError mutator was not found');
+        }
+      }
+
+      if (!isObjectEmpty(submitErrors)) {
+        // Flatten nested errors object for easier comparison
+        const flatErrors = flatten(submitErrors);
+        const changed: string[] = [];
+        // Iterate over each error
+        Object.keys(flatErrors).forEach(key => {
+          // Compare the value for the error field path
+          if (getIn(prevValues.current, key) !== getIn(values, key)) {
+            changed.push(key);
+          }
         });
 
-        prevValues.current = values;
-    });
+        if (changed.length) {
+          if (resetSubmitErrors) {
+            resetSubmitErrors(changed);
+          } else {
+            console.error('resetSubmitError mutator was not found');
+          }
+        }
+      }
+    }
 
-    return null;
-}
+    prevValues.current = values;
+  });
+
+  return null;
+};
 
 export default function SubmitErrorsSpy() {
-    return <FormSpy subscription={{ values: true }} render={Spy} />;
+  return (
+    <FormSpy
+      subscription={{ values: true, submitError: true, submitErrors: true }}
+      render={Spy}
+    />
+  );
 }

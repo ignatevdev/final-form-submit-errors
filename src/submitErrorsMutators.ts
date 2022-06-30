@@ -1,46 +1,54 @@
-import type {Mutator} from 'final-form';
+import type { Mutator } from 'final-form';
+import { FORM_ERROR } from 'final-form';
 
-import clean from './_clean';
-import flatten from './_flatten';
-import isObjectEmpty from './_isObjectEmpty';
+import { clean } from './utils';
 
-export const resetSubmitErrors: Mutator = ([{ prev, current }], state, { getIn, setIn }) => {
-    // Reset the general submit error on any value change
-    if (state.formState.submitError) {
-        delete state.formState.submitError;
-    }
-
-    if (!isObjectEmpty(state.formState.submitErrors)) {
-        // Flatten nested errors object for easier comparison
-        const flatErrors = flatten(state.formState.submitErrors);
-
-        const changed = [];
-
-        // Iterate over each error
-        Object.keys(flatErrors).forEach(key => {
-            // Compare the value for the error field path
-            if (getIn(prev, key) !== getIn(current, key)) {
-                changed.push(key);
-            }
-        });
-        
-
-        // Reset the error on value change
-        if (changed.length) {
-            let newErrors = state.formState.submitErrors;
-
-            changed.forEach(key => {
-                newErrors = setIn(newErrors, key, null);
-            });
-
-            // Clear submit errors from empty objects and arrays
-            const cleanErrors = clean(newErrors);
-
-            state.formState.submitErrors = cleanErrors;
-        }
-    }
+export interface SubmitErrorsMutators<FormValues = any> {
+  resetSubmitError: Mutator<FormValues>;
+  resetSubmitErrors: Mutator<FormValues>;
 }
 
-export default {
-    resetSubmitErrors
+export type UnwrappedSubmitErrorsMutators = {
+  resetSubmitError: () => void;
+  resetSubmitErrors: (fields: string[]) => void;
 };
+
+export const resetSubmitError: Mutator = (_, state) => {
+  // Reset the general submit error on any value change
+  if (state.formState.submitError) {
+    delete state.formState.submitError;
+  }
+
+  if (state.formState.submitErrors) {
+    delete (state.formState.submitErrors as Record<string, unknown>)[
+      FORM_ERROR
+    ];
+  }
+};
+
+export const resetSubmitErrors: Mutator = (args, state, { setIn }) => {
+  const [fields]: [fields: string[]] = args;
+
+  // Reset the error on value change
+  if (fields.length) {
+    let newErrors = state.formState.submitErrors;
+
+    fields.forEach(key => {
+      if (newErrors) {
+        newErrors = setIn(newErrors, key, null);
+      }
+    });
+
+    // Clear submit errors from empty objects and arrays
+    const cleanErrors = clean(newErrors);
+
+    state.formState.submitErrors = cleanErrors;
+  }
+};
+
+const submitErrorsMutators: SubmitErrorsMutators = {
+  resetSubmitError,
+  resetSubmitErrors,
+};
+
+export default submitErrorsMutators;
