@@ -1,4 +1,5 @@
 # final-form-submit-errors
+
 [![NPM version][npm-image]][npm-url]
 [![Build Status][travis-image]](https://travis-ci.org/ignatevdev/final-form-submit-errors)
 
@@ -15,30 +16,63 @@
 It's very intuitive to clear an error if the field containing the error is changing, and `final-form-submit-errors` does exactly that.
 
 ## Install
-`npm i final-form-submit-errors`  
-or  
+
+`npm i final-form-submit-errors`
+or
 `yarn add final-form-submit-errors`
 
 ## Usage
 
+With the `SubmitErrorsSpy` component:
+
 ```jsx
 import { Form } from 'react-final-form';
-import { submitErrorsMutators, SubmitErrorsSpy } from 'final-form-submit-errors';
+import {
+  submitErrorsMutators,
+  SubmitErrorsSpy,
+} from 'final-form-submit-errors';
 
 const MyForm = () => (
-    <Form
-        onSubmit={onSubmit}
-        mutators={{
-            // add submitErrorsMutators to your mutators
-            ...submitErrorsMutators,
-        }}
-        render={({ handleSubmit }) => (
-            <form onSubmit={handleSubmit}>
-                {/* add SubmitErrorsSpy somewhere in your form */}
-                <SubmitErrorsSpy />
-            </form>
-        )}
-    />
+  <Form
+    onSubmit={onSubmit}
+    mutators={{
+      // add submitErrorsMutators to your mutators
+      ...submitErrorsMutators,
+    }}
+    render={({ handleSubmit }) => (
+      <form onSubmit={handleSubmit}>
+        {/* add SubmitErrorsSpy somewhere in your form */}
+        <SubmitErrorsSpy />
+      </form>
+    )}
+  />
+);
+```
+
+With the `useResetSubmitErrors` hook:
+
+```jsx
+import { Form } from 'react-final-form';
+import {
+  submitErrorsMutators,
+  useResetSubmitErrors,
+} from 'final-form-submit-errors';
+
+const FormContent = ({ handleSubmit }) => {
+  useResetSubmitErrors();
+
+  return <form onSubmit={handleSubmit}>{/* ... */}</form>;
+};
+
+const MyForm = () => (
+  <Form
+    onSubmit={onSubmit}
+    mutators={{
+      // add submitErrorsMutators to your mutators
+      ...submitErrorsMutators,
+    }}
+    render={props => <FormContent {...props} />}
+  />
 );
 ```
 
