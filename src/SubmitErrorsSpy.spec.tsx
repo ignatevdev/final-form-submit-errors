@@ -40,8 +40,8 @@ describe('SubmitErrorsSpy', () => {
 
     fireEvent.submit(getByTestId('form'));
 
-    expect(resetSubmitError).toBeCalledTimes(0);
-    expect(resetSubmitErrors).toBeCalledTimes(0);
+    expect(resetSubmitError).toHaveBeenCalledTimes(0);
+    expect(resetSubmitErrors).toHaveBeenCalledTimes(0);
   });
 
   test('should reset global error on any change', () => {
