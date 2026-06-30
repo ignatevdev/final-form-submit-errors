@@ -27,6 +27,7 @@ export const resetSubmitError: Mutator = (_, state) => {
 };
 
 export const resetSubmitErrors: Mutator = (args, state, { setIn }) => {
+  // @ts-expect-error Missing mutator types
   const [fields]: [fields: string[]] = args;
 
   // Reset the error on value change
